@@ -1,33 +1,60 @@
-# 4. Catálogo de Indicadores
+# 04 — Catálogo de Indicadores
 
-> As definições abaixo são interpretações iniciais das medidas visíveis no material do projeto. Devem ser validadas pelos responsáveis de negócio antes do uso em produção.
+## 1. Objetivo
+Padronizar o significado dos indicadores apresentados no relatório. Os nomes abaixo foram identificados nos visuais do PBIX. As fórmulas oficiais precisam ser confirmadas nas medidas DAX e nas regras da fonte antes de homologação.
 
-| Indicador / medida | Interpretação técnica inicial | Validação de negócio necessária |
+## 2. Indicadores da página Geral
+
+| Indicador | Descrição de negócio | Regra a confirmar |
 |---|---|---|
-| Faturamento Total | Soma de quantidade vendida × preço unitário relacionado | Preço histórico/atual, descontos, impostos, moeda e cancelamentos |
-| Lucro Total | Faturamento menos quantidade × custo unitário relacionado | Custo histórico, despesas incluídas e margem negativa |
-| Total de Vendas | Soma da quantidade vendida | Confirmar unidades vs pedidos vs linhas de transação |
-| Margem de Lucro | Lucro total / faturamento total | Comportamento quando faturamento é zero; formato percentual |
-| Faturamento Ano Anterior | Faturamento deslocado para o ano anterior | Calendário e comparabilidade |
-| Crescimento YoY | (atual − ano anterior) / ano anterior | Histórico ausente e denominador zero |
-| Crescimento MoM | (atual − mês anterior) / mês anterior | Primeiro mês e períodos incompletos |
-| MTD / QTD / YTD | Acumulados do mês / trimestre / ano | Calendário civil ou fiscal e data de corte |
-| Total de Devoluções | Soma da quantidade devolvida | Unidades, devoluções parciais e duplicidades |
-| Faturamento Perdido | Quantidade devolvida × preço unitário relacionado | Valor bruto/líquido e tratamento de reembolso |
-| Taxa de Devolução | Total devolvido / total vendido | Alinhamento de período, população e unidade |
-| % Faturamento Perdido | Faturamento perdido / faturamento total | Denominador e população elegível |
-| Vendas Online | Quantidade vendida filtrada para tipo de loja Online | Padronização dos valores de canal |
-| Produto / Loja Top 1 | TOPN(1) por quantidade vendida | Desempate e contexto de filtros |
+| Faturamento Total | Valor financeiro associado às vendas | Confirmar se considera descontos, cancelamentos, impostos e devoluções |
+| Lucro Total | Resultado financeiro atribuído às vendas | Confirmar componentes de custo e despesas incluídos |
+| Total Vendas | Volume de vendas | Confirmar se é contagem de linhas, transações, pedidos ou unidades |
+| Margem | Relação percentual entre lucro e faturamento | Confirmar fórmula; hipótese comum: lucro / faturamento |
+| Faturamento Atual vs Ano Anterior | Comparação mensal entre períodos | Confirmar alinhamento de datas e tratamento de período parcial |
+| Crescimento YoY | Variação em relação ao período equivalente do ano anterior | Confirmar se exibido como valor ou percentual e fórmula exata |
+| Distribuição por Tipo de Loja | Composição de vendas por tipo de loja | Confirmar métrica usada no visual |
+| Faturamento por Tipo do Produto | Faturamento segmentado por tipo de produto | Confirmar agregação e filtros |
 
-## Modelo de documentação de indicador
-Para cada indicador em produção, registrar:
-- Nome de negócio e definição
-- Fórmula / medida do modelo semântico
-- Unidade e moeda
-- Granularidade e população elegível
-- Dimensões e filtros
-- Lógica temporal e fuso horário
-- Tabelas de origem e linhagem
-- Data Owner e responsável técnico
-- Verificações de qualidade e limitações conhecidas
-- Versão e data de aprovação
+## 3. Indicadores da página Análises
+
+| Recurso | Descrição | Regra a confirmar |
+|---|---|---|
+| Árvore de decomposição | Exploração por Marca, Tipo do Produto e Nome Produto | Identificar a medida analisada e a ordem de expansão padrão |
+| Parâmetro | Alternância de perspectiva analítica | Registrar opções e medidas vinculadas |
+| Crescimento MoM | Comparação mensal, identificada nos recursos visuais | Confirmar fórmula, mês de referência e tratamento de mês sem dados |
+| Análise por produto/loja | Destaques exibidos nos visuais complementares | Confirmar métrica, universo e contexto de filtros |
+
+## 4. Indicadores da página Devoluções
+
+| Indicador | Descrição de negócio | Regra a confirmar |
+|---|---|---|
+| Faturamento Perdido | Valor financeiro atribuído às devoluções | Confirmar se usa preço de venda, valor líquido ou outra base |
+| Devoluções | Quantidade de devoluções | Confirmar se conta registros, pedidos, itens ou unidades |
+| % Devoluções | Proporção de devoluções | Definir numerador e denominador |
+| % Faturamento Perdido | Proporção do faturamento perdido sobre uma base financeira | Definir denominador e período |
+| % Devoluções Mensal | Evolução temporal do percentual | Confirmar se a taxa é recalculada por mês ou média de taxas |
+| % Devoluções por Continente | Distribuição geográfica da taxa | Confirmar associação geográfica e denominador |
+
+## 5. Definições obrigatórias antes da homologação
+Para cada indicador, registrar:
+- Nome de negócio e nome técnico da medida.
+- Descrição e finalidade.
+- Fórmula DAX completa.
+- Numerador e denominador, quando aplicável.
+- Unidade (R$, %, quantidade).
+- Granularidade.
+- Tabelas e colunas de origem.
+- Regras para nulos, cancelamentos e duplicidades.
+- Comportamento esperado sob filtros.
+- Responsável pela aprovação da regra.
+
+## 6. Validações prioritárias
+1. Confirmar se “Total Vendas” representa pedidos, transações, linhas ou unidades.
+2. Confirmar fórmula de margem e componentes do lucro.
+3. Confirmar denominador de % Devoluções.
+4. Confirmar base financeira de Faturamento Perdido.
+5. Validar se as comparações YoY e MoM comparam períodos equivalentes.
+6. Verificar consistência dos totais entre páginas quando o contexto de filtro for equivalente.
+
+**Nota:** não assumir fórmulas apenas pelo nome do cartão. O catálogo deve ser atualizado com as expressões DAX reais e aprovadas.
