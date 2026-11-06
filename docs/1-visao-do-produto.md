@@ -1,57 +1,51 @@
-# 1. Visão do Produto
+# 01 — Visão do Produto
 
-## Produto
-**EletroHashtag — Análise de Vendas e Devoluções**
+## 1. Contexto
+A EletroHashtag possui dados relacionados a vendas e devoluções. O relatório Power BI organiza essas informações em três páginas analíticas para apoiar a leitura do desempenho comercial e a investigação de perdas associadas às devoluções.
 
-## Declaração de visão
-Permitir que equipes comerciais e operacionais compreendam o desempenho de vendas, rentabilidade e devoluções por meio de indicadores confiáveis, acessíveis e definidos de forma consistente no Power BI.
+## 2. Problema de negócio
+Sem uma visão consolidada e navegável, gestores e áreas comerciais podem ter dificuldade para acompanhar indicadores, comparar períodos e identificar dimensões que merecem investigação. O relatório procura reduzir essa fragmentação por meio de indicadores e análises interativas.
 
-## Problema
-Usuários de negócio precisam analisar o desempenho comercial por período, produto, loja e região. Sem definições compartilhadas e acesso a análises consistentes, perguntas recorrentes podem exigir preparação manual e gerar interpretações divergentes.
+## 3. Objetivo do produto
+Disponibilizar uma visão analítica que permita:
+- acompanhar faturamento, lucro, volume de vendas e margem;
+- comparar o faturamento entre períodos, incluindo referência ao ano anterior;
+- explorar resultados por tipo de loja, produto, país e continente;
+- analisar devoluções, faturamento perdido e sua evolução;
+- aprofundar a investigação por marca, tipo de produto e produto.
 
-## Usuários-alvo
-- Liderança comercial
-- Analistas de vendas
-- Gestores de operações/devoluções
-- Data Owner de negócio e Data Steward
+## 4. Usuários e necessidades
+| Perfil potencial | Necessidade |
+|---|---|
+| Gestão comercial | Acompanhar desempenho e tendências |
+| Gestão financeira | Monitorar faturamento, lucro, margem e perdas |
+| Operação/estoque | Investigar produtos e categorias com desempenho relevante |
+| Análise de dados | Explorar dimensões, filtros e variações temporais |
 
-As personas são propostas e devem ser confirmadas com stakeholders reais.
+Os perfis são personas de referência para documentação; não representam confirmação de usuários reais ou entrevistas realizadas.
 
-## Proposta de valor
-- Visão analítica única dos principais indicadores de vendas e devoluções
-- Exploração por dimensões relevantes do negócio
-- Comparações temporais para identificar tendências
-- Definições e verificações de qualidade documentadas para apoiar a confiança
+## 5. Escopo funcional identificado no PBIX
+### Página Geral
+Cartões de Faturamento Total, Lucro Total, Total Vendas e Margem; comparação mensal de faturamento atual versus ano anterior; vendas por tipo de loja; faturamento por tipo de produto; visão por continente e país; segmentação por ano.
 
-## Objetivos
-1. Disponibilizar os principais indicadores de vendas e devoluções.
-2. Permitir comparações entre períodos e dimensões de negócio.
-3. Melhorar a consistência da interpretação dos indicadores.
-4. Estabelecer uma base de governança e qualidade.
+### Página Análises
+Árvore de decomposição com Marca, Tipo do Produto e Nome Produto; parâmetro de análise; segmentações por País, Continente e Datas; visuais complementares de análise de produto e tipo de produto.
 
-## Métricas de sucesso propostas
-| Resultado | Métrica | Baseline / meta |
-|---|---|---|
-| Adoção | Usuários ativos mensais / usuários elegíveis | A medir |
-| Confiabilidade | Taxa de atualização bem-sucedida e incidentes de dados | SLA a definir |
-| Confiança | Divergência de reconciliação com fonte aprovada | Tolerância a definir |
-| Eficiência | Tempo para responder perguntas comerciais recorrentes | Baseline a medir |
-| Usabilidade | Sucesso em tarefas e feedback dos usuários | Validar com usuários |
+### Página Devoluções
+Cartões de Faturamento Perdido, Devoluções, % Devoluções e % Faturamento Perdido; evolução mensal de % Devoluções; mapa de % Devoluções por Continente; análise por Marca, Tipo do Produto e Nome Produto; segmentação por ano e tipo de produto.
 
-## Escopo
-### Incluído
-- Visão geral de vendas e rentabilidade
-- Análise por produto, marca, loja, região e canal
-- Volume, taxa e impacto financeiro das devoluções
-- Cálculos de inteligência temporal
-- Documentação de indicadores, governança e qualidade
+### Recursos complementares
+Capa e páginas Tooltip Devoluções e Tooltip Vendas. Os tooltips oferecem contexto adicional, não constituindo páginas analíticas independentes.
 
-### Fora do escopo, salvo aprovação
-Previsões, orçamento, alertas proativos, gravação de dados (write-back), análise automatizada de causa-raiz, integrações com CRM/ERP e experiência específica para dispositivos móveis.
+## 6. Fora do escopo confirmado
+Não foram identificadas páginas independentes chamadas “Top 5 Vendas” ou “Top 5 Devoluções”. Rankings desse tipo não devem ser descritos como dashboards próprios sem evidência de que existam em outra versão do relatório.
 
-## Princípios do produto
-- Definições de negócio antes do acabamento visual
-- Confiabilidade dos números acima da quantidade de indicadores
-- Contexto explícito: período, unidade, filtros e comparação
-- Acesso com privilégio mínimo
-- Mudanças rastreáveis e decisões registradas
+Também não se deve afirmar que o relatório contém alertas automáticos, previsão, metas, RLS, atualização agendada ou monitoramento operacional sem validação específica.
+
+## 7. Indicadores de sucesso propostos
+- Indicadores reconciliados com a fonte de dados.
+- Filtros e interações funcionando conforme regras definidas.
+- Usuários conseguindo responder às perguntas de negócio previstas.
+- Redução de divergências de interpretação por meio de definições padronizadas.
+
+Esses são critérios propostos para avaliar o produto, não resultados medidos.
