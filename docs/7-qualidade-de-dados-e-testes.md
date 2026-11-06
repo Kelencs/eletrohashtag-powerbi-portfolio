@@ -1,36 +1,47 @@
-# 7. Qualidade de Dados e Testes
+# 07 — Qualidade de Dados e Testes
 
-## Regras de qualidade
-| Regra | Teste / evidência | Severidade sugerida |
+## 1. Objetivo
+Definir controles para avaliar a confiabilidade dos dados que alimentam os indicadores de vendas e devoluções.
+
+## 2. Dimensões de qualidade
+| Dimensão | Pergunta de controle | Exemplo de validação |
 |---|---|---|
-| Chaves de dimensão | Sem chaves duplicadas ou nulas | Bloqueante |
-| Integridade referencial | Fatos encontram produto, loja e data válidos; exceções quantificadas | Alta |
-| Quantidade | Vendas/devoluções não negativas, salvo ajuste documentado | Alta |
-| Preço e custo | Valores válidos; tratamento de nulos/negativos documentado | Alta |
-| Reconciliação | Totais do Power BI reconciliam com amostra da fonte aprovada | Bloqueante |
-| Cobertura do calendário | Datas cobrem fatos e períodos comparativos | Alta |
-| Inteligência temporal DAX | Testar ano, mês, múltipla seleção, ausência de histórico e ano parcial | Alta |
-| Filtros cruzados | Produto, marca, loja, continente, canal e data | Média |
-| Ranking | Top 5, empates e contexto de filtros | Média |
-| Atualização | Sucesso, falha, atraso e timestamp | Alta |
-| Acessibilidade | Contraste, títulos, unidades, teclado e texto alternativo | Média |
+| Completude | Campos críticos estão preenchidos? | Datas, identificadores, valores e categorias não nulos |
+| Unicidade | Há duplicidade indevida? | Identificadores únicos na granularidade esperada |
+| Validade | Os valores respeitam formatos e domínios? | Datas válidas, valores monetários numéricos |
+| Consistência | Os dados concordam entre tabelas e páginas? | País associado ao continente correto |
+| Integridade | As referências encontram correspondência? | Chaves relacionadas existentes |
+| Atualidade | Os dados estão atualizados? | Data de carga dentro da frequência acordada |
+| Acurácia | Os valores refletem a fonte? | Reconciliação de totais e amostras |
 
-## Níveis de teste
-- **Testes de dados:** esquema, chaves, nulos, domínios, integridade referencial e duplicidades.
-- **Testes de medidas:** cálculo independente de valores esperados para recortes representativos.
-- **Testes visuais:** comportamento dos filtros, rótulos, formatação, estados vazios e rankings.
-- **UAT / homologação:** usuários de negócio executam cenários acordados e aprovam resultados.
-- **Regressão:** repetir cenários críticos de indicadores e filtros após alterações.
+## 3. Controles específicos do projeto
+- Conferir se o total de vendas segue a granularidade definida.
+- Validar o tratamento de cancelamentos e devoluções no faturamento.
+- Verificar se o faturamento perdido utiliza a regra financeira aprovada.
+- Confirmar que os percentuais utilizam denominadores consistentes.
+- Conferir a classificação de tipo de loja, tipo de produto, marca, país e continente.
+- Validar datas e períodos usados nas comparações YoY e MoM.
+- Avaliar registros sem país/continente ou sem categoria.
+- Verificar se filtros não produzem totais inesperados.
 
-## Cenários de homologação (UAT)
-1. Selecionar um ano e reconciliar faturamento e quantidade com a fonte.
-2. Selecionar uma marca e verificar atualização consistente dos visuais.
-3. Comparar período com ano anterior quando houver histórico.
-4. Selecionar período sem dados do ano anterior e verificar tratamento adequado.
-5. Confirmar com o Data Owner o denominador e a unidade da taxa de devolução.
-6. Validar ranking dos cinco produtos mais devolvidos e regra de empate.
-7. Testar acesso autorizado e não autorizado, incluindo RLS se aplicável.
-8. Confirmar horário da última atualização e comportamento de dados desatualizados.
+## 4. Reconciliação
+Para cada KPI:
+1. Selecionar um período e contexto de filtro conhecidos.
+2. Obter o resultado no Power BI.
+3. Calcular o mesmo indicador diretamente na fonte ou em consulta independente.
+4. Comparar os resultados.
+5. Investigar diferenças de granularidade, filtros, nulos, duplicidades e regras de negócio.
+6. Registrar evidência e conclusão.
 
-## Evidências
-Guardar caso de teste, filtros de entrada, resultado esperado, resultado obtido, aprovado/reprovado, testador, data e link do defeito.
+## 5. Evidências
+Manter, por cenário:
+- identificador do teste;
+- contexto de filtros;
+- valor esperado;
+- valor obtido;
+- resultado;
+- captura de tela ou consulta de apoio;
+- data e responsável pela execução.
+
+## 6. Situação
+Este documento estabelece controles propostos. Não há afirmação de que as verificações foram executadas ou aprovadas. O status deve ser preenchido somente após a execução.
