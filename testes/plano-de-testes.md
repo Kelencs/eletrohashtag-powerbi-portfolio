@@ -1,238 +1,130 @@
-# Plano de Testes — Projeto EletroHashtag Power BI
-
-**Projeto:** EletroHashtag — Análise de Vendas e Devoluções  
-**Categoria:** Business Intelligence | Power BI | Qualidade de Dados  
-**Responsável pelo planejamento:** Product Owner de Dados  
-**Status:** Proposta de validação
-
----
+# 12 — Plano de Testes
 
 ## 1. Objetivo
+Definir cenários para verificar se o relatório apresenta dados, indicadores, filtros e interações corretos. O plano cobre as páginas Geral, Análises e Devoluções, além dos tooltips.
 
-Estabelecer os cenários e critérios de validação necessários para garantir que os dashboards do projeto EletroHashtag apresentem informações consistentes, cálculos corretos e comportamento adequado diante de filtros e interações.
+## 2. Escopo
+- Página Geral.
+- Página Análises.
+- Página Devoluções.
+- Tooltip Devoluções.
+- Tooltip Vendas.
+- Medidas DAX, segmentações, parâmetro, interações e modelo semântico.
 
-O plano contempla testes funcionais, validação de indicadores, qualidade dos dados, modelagem e experiência de utilização.
+A Capa será verificada apenas quanto à navegação. Não há páginas independentes Top 5 Vendas ou Top 5 Devoluções nesta versão do arquivo.
 
-## 2. Escopo dos testes
+## 3. Tipos de teste
+- Funcional: comportamento de cartões, gráficos e navegação.
+- Indicadores: cálculo e reconciliação de medidas.
+- Filtros/interações: propagação de seleções.
+- Temporal: comparação YoY/MoM e calendário.
+- Geográfico: mapa por continente.
+- Tooltip: contexto herdado do visual de origem.
+- Qualidade: completude, validade, unicidade e integridade.
+- Usabilidade: legibilidade, títulos, unidades e consistência visual.
 
-Serão validadas as cinco páginas do projeto:
+## 4. Cenários de teste
 
-| Dashboard | Objetivo da validação |
-|---|---|
-| Geral | Validar indicadores executivos e evolução das vendas |
-| Análises | Validar segmentações por produto, marca e loja |
-| Devoluções | Validar indicadores de devolução e perdas financeiras |
-| Top 5 Devoluções | Validar ranking de produtos devolvidos |
-| Top 5 Vendas | Validar ranking de produtos por faturamento |
-
-Também serão avaliados os relacionamentos do modelo de dados, medidas DAX, filtros, segmentações e consistência entre os indicadores.
-
-## 3. Estratégia de testes
-
-A estratégia será dividida em seis frentes:
-
-1. **Testes funcionais:** verificar se os elementos dos dashboards funcionam conforme esperado.
-2. **Testes de indicadores:** validar fórmulas e resultados das medidas DAX.
-3. **Testes de qualidade de dados:** verificar integridade, consistência e completude.
-4. **Testes de filtros e interações:** verificar se os filtros afetam corretamente os visuais.
-5. **Testes de modelo de dados:** validar relacionamentos e propagação dos filtros.
-6. **Testes de usabilidade:** avaliar clareza, legibilidade e facilidade de interpretação.
-
-## 4. Cenários de testes funcionais
-
-### 4.1 Dashboard Geral
-
+### 4.1 Capa e navegação
 | ID | Cenário | Resultado esperado |
 |---|---|---|
-| CT-001 | Validar apresentação do faturamento total | O cartão deve apresentar o valor correspondente à base e aos filtros aplicados |
-| CT-002 | Validar cálculo do lucro total | O resultado deve corresponder à regra de negócio definida |
-| CT-003 | Validar quantidade de vendas | O indicador deve respeitar o critério de contagem definido |
-| CT-004 | Validar margem apresentada | O percentual deve corresponder à fórmula de margem aprovada |
-| CT-005 | Validar comparação mensal | Os valores devem corresponder aos períodos selecionados |
-| CT-006 | Validar distribuição por canal | Os valores devem respeitar a classificação de loja física e online |
-| CT-007 | Validar filtros de período | Os indicadores e gráficos devem responder ao período selecionado |
+| NAV-01 | Acionar botão de entrada | Navegar para a página pretendida |
+| NAV-02 | Usar botões de navegação nas páginas | Destino correto e sem erro |
+| NAV-03 | Retornar à página inicial, se houver ação disponível | Retorno à Capa |
 
-### 4.2 Dashboard Análises
-
+### 4.2 Geral
 | ID | Cenário | Resultado esperado |
 |---|---|---|
-| CT-008 | Filtrar por marca | Os gráficos devem apresentar somente os dados da marca selecionada |
-| CT-009 | Filtrar por produto | Os indicadores devem refletir o produto selecionado |
-| CT-010 | Filtrar por loja | Os resultados devem corresponder à loja selecionada |
-| CT-011 | Alternar entre faturamento e vendas | Os gráficos devem atualizar conforme a métrica selecionada |
-| CT-012 | Validar produto com maior volume | O produto destacado deve corresponder ao maior valor no contexto filtrado |
+| GER-01 | Conferir Faturamento Total | Reconciliado com a fonte e filtros aplicados |
+| GER-02 | Conferir Lucro Total | Reconciliado com regra de lucro aprovada |
+| GER-03 | Conferir Total Vendas | Contagem conforme granularidade documentada |
+| GER-04 | Conferir Margem | Fórmula e denominador aprovados |
+| GER-05 | Alterar Ano | Cartões e visuais reagem corretamente |
+| GER-06 | Conferir Faturamento Atual vs Ano Anterior | Períodos comparáveis e valores corretos |
+| GER-07 | Conferir vendas por Tipo de Loja | Categorias e agregações corretas |
+| GER-08 | Conferir faturamento por Tipo do Produto | Valores corretos no contexto |
+| GER-09 | Conferir Continente/País | Hierarquia geográfica consistente |
 
-### 4.3 Dashboard Devoluções
-
+### 4.3 Análises
 | ID | Cenário | Resultado esperado |
 |---|---|---|
-| CT-013 | Validar total de devoluções | A quantidade deve corresponder à base de devoluções |
-| CT-014 | Validar faturamento perdido | O valor deve seguir a regra de cálculo aprovada |
-| CT-015 | Validar percentual de devoluções | O percentual deve respeitar o denominador definido |
-| CT-016 | Validar percentual de faturamento perdido | O cálculo deve utilizar a base financeira correta |
-| CT-017 | Validar evolução mensal | Os valores devem respeitar o calendário e o período selecionado |
-| CT-018 | Validar análise por marca | Os resultados devem refletir corretamente a marca selecionada |
+| ANA-01 | Expandir árvore por Marca | Decomposição correta |
+| ANA-02 | Expandir por Tipo do Produto | Categorias e valores corretos |
+| ANA-03 | Expandir por Nome Produto | Produtos correspondem ao contexto |
+| ANA-04 | Alterar Parâmetro | Métrica/visual dependente é atualizado |
+| ANA-05 | Filtrar País | Visuais afetados respeitam seleção |
+| ANA-06 | Filtrar Continente | Visuais afetados respeitam seleção |
+| ANA-07 | Filtrar Datas | Período aplicado corretamente |
+| ANA-08 | Conferir visual complementar de produto/tipo | Informação e métrica coerentes |
 
-### 4.4 Dashboard Top 5 Devoluções
-
+### 4.4 Devoluções
 | ID | Cenário | Resultado esperado |
 |---|---|---|
-| CT-019 | Validar ranking dos cinco produtos | Devem aparecer os cinco produtos com maior valor conforme a métrica utilizada |
-| CT-020 | Alterar mês selecionado | O ranking deve ser atualizado para o período escolhido |
-| CT-021 | Validar percentual de devoluções | O percentual deve corresponder à regra de negócio definida |
-| CT-022 | Validar ordenação do ranking | Os produtos devem ser apresentados em ordem decrescente |
+| DEV-01 | Conferir Faturamento Perdido | Reconciliado com regra financeira aprovada |
+| DEV-02 | Conferir Devoluções | Contagem conforme granularidade definida |
+| DEV-03 | Conferir % Devoluções | Numerador e denominador aprovados |
+| DEV-04 | Conferir % Faturamento Perdido | Base financeira e fórmula aprovadas |
+| DEV-05 | Conferir evolução mensal | Datas e cálculo mensal corretos |
+| DEV-06 | Filtrar Ano | Indicadores e visuais respeitam o filtro |
+| DEV-07 | Filtrar Tipo do Produto | Indicadores e visuais respeitam o filtro |
+| DEV-08 | Conferir mapa por Continente | Localização e taxa coerentes |
+| DEV-09 | Conferir análise por Marca/Tipo/Nome Produto | Categorias e valores coerentes |
 
-### 4.5 Dashboard Top 5 Vendas
-
+### 4.5 Tooltips
 | ID | Cenário | Resultado esperado |
 |---|---|---|
-| CT-023 | Validar ranking de faturamento | Os cinco produtos devem corresponder aos maiores valores |
-| CT-024 | Alterar categoria | O ranking deve considerar somente a categoria selecionada |
-| CT-025 | Validar faturamento total | O valor deve corresponder à soma dos registros considerados |
-| CT-026 | Validar ordenação | Os produtos devem ser apresentados em ordem decrescente de faturamento |
+| TIP-01 | Acionar Tooltip Vendas em um ponto do visual | Detalhes correspondem ao ponto selecionado |
+| TIP-02 | Acionar Tooltip Devoluções | Detalhes correspondem ao ponto selecionado |
+| TIP-03 | Alterar filtros e repetir | Tooltip respeita o novo contexto |
+| TIP-04 | Verificar conteúdo e legibilidade | Valores, rótulos e imagens são legíveis |
 
-## 5. Testes de qualidade de dados
-
-| ID | Regra de validação | Resultado esperado |
+## 5. Testes de qualidade e modelo
+| ID | Controle | Resultado esperado |
 |---|---|---|
-| QD-001 | Verificar campos obrigatórios | Não devem existir valores ausentes em campos críticos |
-| QD-002 | Verificar duplicidade de identificadores | Não devem existir duplicidades indevidas nas chaves |
-| QD-003 | Verificar integridade referencial | As chaves estrangeiras devem encontrar correspondência nas dimensões |
-| QD-004 | Verificar valores financeiros | Não devem existir valores inválidos ou inconsistentes |
-| QD-005 | Verificar datas | As datas devem estar em formato válido e dentro do período esperado |
-| QD-006 | Verificar registros de devolução | Os registros devem seguir as regras de relacionamento com as vendas |
-| QD-007 | Verificar atualização dos dados | A atualização deve refletir a fonte de dados conforme a frequência definida |
+| QD-01 | Campos críticos nulos | Ausências identificadas e tratadas |
+| QD-02 | Duplicidade | Duplicidades avaliadas na granularidade correta |
+| QD-03 | Integridade referencial | Chaves relacionadas válidas |
+| QD-04 | Datas | Datas válidas e períodos consistentes |
+| QD-05 | Valores financeiros | Tipos e sinais coerentes com a regra |
+| MD-01 | Relacionamentos | Cardinalidade e direção de filtro documentadas |
+| MD-02 | Calendário | Relação e marcação de tabela de datas verificadas |
+| MD-03 | Filtros cruzados | Sem propagação inesperada |
+| DAX-01 | Medidas principais | Comparadas com cálculo independente |
+| DAX-02 | YoY/MoM | Comparação temporal equivalente |
 
-## 6. Testes de medidas DAX
+## 6. Critérios de entrada
+- PBIX e fonte de dados disponíveis.
+- Regras de negócio e fórmulas acessíveis.
+- Contexto de filtros de teste definido.
+- Ambiente de validação preparado.
 
-As medidas DAX devem ser comparadas com cálculos independentes realizados diretamente sobre a fonte de dados ou por meio de consultas SQL, quando disponíveis.
+## 7. Critérios de saída
+- Cenários críticos executados.
+- Divergências registradas e tratadas.
+- KPIs reconciliados ou pendências formalizadas.
+- Evidências anexadas.
+- Aprovação funcional registrada pelo responsável.
 
-| ID | Medida ou funcionalidade | Validação |
-|---|---|---|
-| DAX-001 | Faturamento total | Comparar a medida com a soma dos valores de venda |
-| DAX-002 | Lucro total | Comparar com a regra de cálculo de lucro aprovada |
-| DAX-003 | Margem | Validar a relação entre lucro e faturamento |
-| DAX-004 | Total de vendas | Conferir o critério de contagem utilizado |
-| DAX-005 | Total de devoluções | Comparar com os registros válidos de devolução |
-| DAX-006 | Variação mensal | Validar comparação entre períodos equivalentes |
-| DAX-007 | Acumulados temporais | Validar MTD, QTD e YTD, quando aplicáveis |
-| DAX-008 | Comparação anual | Validar os resultados de ano atual versus ano anterior |
-
-**Atenção:** antes da aprovação, devem ser documentadas as fórmulas oficiais e os critérios de negócio de cada indicador. Por exemplo, é necessário definir se o faturamento considera descontos, cancelamentos e devoluções.
-
-## 7. Testes do modelo de dados
-
-| ID | Cenário | Resultado esperado |
-|---|---|---|
-| MD-001 | Validar relacionamento entre fatos e dimensões | Os relacionamentos devem respeitar as chaves definidas |
-| MD-002 | Validar tabela calendário | Deve existir correspondência entre as datas e a dimensão calendário |
-| MD-003 | Validar direção de filtragem | Os filtros devem se propagar conforme o desenho do modelo |
-| MD-004 | Verificar cardinalidade | Os relacionamentos devem apresentar cardinalidade adequada |
-| MD-005 | Validar ausência de ambiguidade | Não devem existir caminhos de filtragem conflitantes |
-| MD-006 | Validar interação entre tabelas de vendas e devoluções | Os indicadores devem respeitar a lógica de negócio estabelecida |
-
-## 8. Testes de usabilidade
-
-- Verificar se os títulos dos gráficos são claros.
-- Avaliar se os indicadores possuem nomes e unidades compreensíveis.
-- Verificar se os filtros são intuitivos.
-- Validar se os gráficos facilitam a identificação de tendências.
-- Avaliar a consistência visual entre as páginas.
-- Verificar se os percentuais e valores monetários possuem formatação adequada.
-- Garantir que os dashboards não apresentem informações cortadas ou sobrepostas.
-
-## 9. Critérios de entrada e saída
-
-### Critérios de entrada
-
-- Base de dados disponível.
-- Modelo de dados estruturado.
-- Medidas DAX implementadas.
-- Regras de negócio documentadas.
-- Dashboards disponíveis para validação.
-
-### Critérios de saída
-
-- Todos os cenários críticos executados.
-- Indicadores financeiros reconciliados com a fonte.
-- Filtros e interações validados.
-- Inconsistências críticas corrigidas.
-- Evidências dos testes registradas.
-- Aprovação funcional dos resultados.
-
-## 10. Registro de execução dos testes
-
-Cada cenário deve possuir um registro de execução:
-
+## 8. Registro de execução
 | ID | Status | Evidência | Observação |
 |---|---|---|---|
-| CT-001 | Não executado | Pendente | Aguardando validação |
-| CT-002 | Não executado | Pendente | Aguardando validação |
-| CT-003 | Não executado | Pendente | Aguardando validação |
+| GER-01 | Não executado | Pendente | Aguardando reconciliação |
+| GER-02 | Não executado | Pendente | Aguardando reconciliação |
+| DEV-03 | Não executado | Pendente | Confirmar denominador |
+| TIP-01 | Não executado | Pendente | Validar contexto |
 
-**Status possíveis:**
-- Não executado
-- Aprovado
-- Reprovado
-- Bloqueado
-- Em correção
+Status possíveis: Não executado, Aprovado, Reprovado, Bloqueado ou Em correção. Não marcar como aprovado sem evidência.
 
-Os resultados devem ser atualizados durante a execução efetiva dos testes. Não considerar um cenário aprovado sem evidência.
+## 9. Gestão de defeitos
+Registrar ID, página, visual/indicador, filtros ativos, passos para reproduzir, resultado esperado, resultado obtido, evidência, severidade, responsável, correção e reteste.
 
-## 11. Gestão de defeitos
+## 10. Severidade
+- Crítica: indicador financeiro incorreto ou erro que comprometa decisões relevantes.
+- Alta: filtro ou cálculo com impacto significativo.
+- Média: comportamento incorreto com impacto limitado.
+- Baixa: ajuste visual ou de apresentação.
 
-Quando uma inconsistência for identificada, registrar:
+## 11. Pontos de atenção
+Priorizar a definição de Total Vendas, Margem, Faturamento Perdido, % Devoluções e % Faturamento Perdido. Conferir também períodos incompletos em YoY/MoM e o contexto herdado pelos tooltips.
 
-- Identificador do defeito.
-- Dashboard afetado.
-- Indicador ou funcionalidade envolvida.
-- Descrição do problema.
-- Resultado esperado.
-- Resultado encontrado.
-- Evidência visual.
-- Severidade.
-- Responsável pela correção.
-- Status da correção.
-- Resultado do reteste.
-
-### Classificação de severidade
-
-| Severidade | Definição |
-|---|---|
-| Crítica | Indicador financeiro incorreto ou falha que compromete decisões importantes |
-| Alta | Filtro, cálculo ou visualização com impacto relevante |
-| Média | Problema funcional com impacto limitado |
-| Baixa | Ajuste visual ou melhoria de apresentação |
-
-## 12. Riscos identificados
-
-| Risco | Impacto | Ação preventiva |
-|---|---|---|
-| Divergência entre indicadores | Decisões incorretas | Reconciliação com a fonte |
-| Fórmulas DAX incorretas | Resultados inconsistentes | Testes independentes das medidas |
-| Filtros com comportamento inesperado | Interpretação equivocada | Testes de interação |
-| Dados duplicados | Superestimação de indicadores | Regras de unicidade |
-| Relacionamentos incorretos | Totais divergentes | Validação do modelo |
-| Ausência de documentação das métricas | Falta de padronização | Catálogo de indicadores |
-
-## 13. Critérios de aprovação do projeto
-
-O projeto poderá ser considerado validado quando:
-
-1. Os indicadores principais apresentarem resultados reconciliados.
-2. As regras de negócio estiverem documentadas.
-3. Os filtros e segmentações funcionarem corretamente.
-4. O ranking dos produtos apresentar os resultados esperados.
-5. Os relacionamentos do modelo estiverem validados.
-6. As inconsistências identificadas estiverem corrigidas ou formalmente registradas.
-7. As evidências de execução estiverem disponíveis.
-
-## 14. Resultado esperado
-
-A aplicação deste plano de testes busca assegurar que o EletroHashtag Power BI seja uma solução confiável de análise comercial, permitindo que usuários e gestores interpretem corretamente os indicadores de vendas, faturamento, lucro e devoluções.
-
-O objetivo é garantir que as informações apresentadas sejam consistentes, rastreáveis e adequadas para apoiar decisões de negócio.
-
----
-
-**Responsabilidade do Product Owner de Dados:** garantir que os critérios de negócio estejam claros, que os indicadores atendam às necessidades dos usuários e que os resultados sejam validados antes de serem considerados prontos para utilização.
+Este plano descreve testes planejados; não comprova que foram executados.
