@@ -1,19 +1,40 @@
-# 11. Roteiro de Entrega
+# 11 — Roadmap de Evolução
 
-Sequência proposta, sujeita à validação dos stakeholders e à capacidade da equipe.
+## 1. Objetivo
+Organizar oportunidades de evolução a partir das capacidades observadas no relatório. Este roadmap é uma proposta; não representa funcionalidades já implementadas ou compromissos de entrega.
 
-| Fase | Entregáveis | Critério de saída |
-|---|---|---|
-| 0. Descoberta | Stakeholders, perguntas de negócio, fontes, glossário e definições de indicadores | Data Owner aprova escopo e definições |
-| 1. Fundação | Esquema estrela, calendário, regras de qualidade, segurança e medidas base | Reconciliação aprovada |
-| 2. MVP | Visão geral, filtros essenciais, comparação temporal e indicadores prioritários de devolução | UAT e DoD concluídos |
-| 3. Adoção | Análises detalhadas, rankings, tooltips e guia do usuário | Usuários-chave validam tarefas |
-| 4. Operação | Monitoramento, SLA, catálogo, suporte e processo de release | Ownership operacional aceito |
+## 2. Agora — Confiabilidade e clareza
+- Confirmar fórmulas DAX e regras de negócio dos KPIs.
+- Reconciliar faturamento, lucro, vendas e devoluções com a fonte.
+- Documentar o parâmetro utilizado na página Análises.
+- Validar interações, filtros e tooltips.
+- Documentar modelo semântico e origem dos dados.
+- Revisar títulos, unidades e descrições dos indicadores.
 
-## Critérios sugeridos para aceite do MVP
-- Indicadores principais aprovados e reconciliados.
-- Histórias prioritárias aceitas.
-- Verificações de qualidade executadas e documentadas.
-- Modelo de acesso verificado.
-- Atualização e responsável definidos.
-- Guia do usuário e limitações conhecidas publicados.
+## 3. Próximo — Aprofundamento analítico
+- Investigar motivos de devolução, caso a fonte contenha essa informação.
+- Permitir análise por período, produto, marca e região com métricas padronizadas.
+- Avaliar ranking de produtos como visual ou página adicional, se houver necessidade de negócio.
+- Incluir metas e comparação com orçamento, caso existam metas aprovadas.
+- Avaliar segmentação por canal e rentabilidade, conforme disponibilidade dos dados.
+
+## 4. Futuro — Monitoramento e ação
+- Avaliar alertas para variações relevantes de vendas ou devoluções.
+- Criar acompanhamento de metas e indicadores críticos.
+- Avaliar previsão de demanda somente após validação de histórico, granularidade e qualidade.
+- Avaliar segurança por perfil (RLS) se houver requisito de acesso segmentado.
+- Definir processo de atualização, monitoramento e suporte.
+
+## 5. Priorização sugerida
+| Iniciativa | Valor de negócio | Dependência | Prioridade sugerida |
+|---|---|---|---|
+| Validar KPIs e DAX | Muito alto | Acesso ao modelo e fonte | Alta |
+| Validar filtros e tooltips | Alto | Cenários de teste | Alta |
+| Documentar modelo semântico | Alto | Model view/Power Query | Alta |
+| Análise de motivos de devolução | Alto | Campo de motivo disponível | Média |
+| Ranking dedicado de produtos | Médio | Requisito validado | Média |
+| Alertas e previsão | Potencialmente alto | Dados confiáveis e regra de negócio | Baixa/futura |
+
+## 6. Critérios para entrada no roadmap
+Uma iniciativa deve ter problema de negócio definido, usuário beneficiado, valor esperado, dados disponíveis, critérios de aceite e dependências conhecidas.
+
